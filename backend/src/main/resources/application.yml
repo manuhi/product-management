@@ -2,3 +2,7 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
+
+product-management:
+  currency:
+    base-url: https://api.exchangeratesapi.io

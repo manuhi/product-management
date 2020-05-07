@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.event.EventListener;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @SpringBootApplication
+@EnableCaching
 public class ProductManagementBackendApplication {
 
   private final CategoryRepository categoryRepository;
@@ -39,7 +41,7 @@ public class ProductManagementBackendApplication {
 
     final Optional<Category> cat = categoryRepository.findByName("1");
 
-    productRepository.save(new Product(null, "Product 1", "My description", "my price", cat.get()));
+    productRepository.save(new Product(null, "Product 1", "My description", 1.5, cat.get()));
 
     System.out.println(productRepository.findAll());
 
