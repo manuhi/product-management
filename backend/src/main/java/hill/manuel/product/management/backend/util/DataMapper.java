@@ -2,7 +2,7 @@ package hill.manuel.product.management.backend.util;
 
 import hill.manuel.product.management.backend.entity.Category;
 import hill.manuel.product.management.backend.entity.Product;
-import hill.manuel.product.management.backend.fixer.CurrencyClient;
+import hill.manuel.product.management.backend.currency.CurrencyClient;
 import hill.manuel.product.management.backend.rest.pojo.ProductInput;
 import hill.manuel.product.management.backend.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,7 @@ public class DataMapper {
   private final CategoryService categoryService;
 
   public Product mapProductFromInput(final ProductInput productInput) {
-    Product product = new Product();
-    product.setId(productInput.getId());
+    final Product product = new Product();
     product.setName(productInput.getName());
     product.setDescription(productInput.getDescription());
     product.setPrice(currencyClient.getPriceInEuroForSymbol(productInput.getPriceInput()));

@@ -1,4 +1,4 @@
-package hill.manuel.product.management.backend.fixer;
+package hill.manuel.product.management.backend.currency;
 
 import hill.manuel.product.management.backend.rest.pojo.PriceInput;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class CurrencyClient {
 
   @Cacheable(value = "priceSymbols")
   public List<String> getAllAvailablePriceSymbols() {
-    List<String> priceSymbols = new ArrayList<>();
+    final List<String> priceSymbols = new ArrayList<>();
     final ResponseEntity<SymbolResponse> response = restTemplate.getForEntity("/latest", SymbolResponse.class);
     if (response.getStatusCodeValue() == HttpStatus.OK.value()) {
       if (response.getBody() != null) {
@@ -63,12 +62,12 @@ public class CurrencyClient {
 
     if (symbol.equals(BASE_CURRENCY)) {
       log.info("Currency is already " + BASE_CURRENCY);
-      return 1.0;
+      return priceInput.getValue();
     }
 
-    Map<String, String> uriVariables = new LinkedHashMap<>();
+    final Map<String, String> uriVariables = new LinkedHashMap<>();
     uriVariables.put("base", symbol);
-    final ResponseEntity<SymbolResponse> response = restTemplate.getForEntity("/latest", SymbolResponse.class, uriVariables);
+    final ResponseEntity<SymbolResponse> response = restTemplate.getForEntity("/latest?base="+symbol, SymbolResponse.class);
     if (response.getStatusCodeValue() == HttpStatus.OK.value()) {
       if (response.getBody() != null) {
         final Map<String, Double> rates = response.getBody().getRates();

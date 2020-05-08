@@ -1,4 +1,4 @@
-package hill.manuel.product.management.backend.fixer;
+package hill.manuel.product.management.backend.currency;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

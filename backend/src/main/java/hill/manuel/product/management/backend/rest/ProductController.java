@@ -36,7 +36,12 @@ public class ProductController {
 
   @PostMapping
   public Product saveProduct(@RequestBody final ProductInput productInput) {
-    return productService.saveOrUpdateProduct(dataMapper.mapProductFromInput(productInput));
+    return productService.saveOrUpdateProduct(dataMapper.mapProductFromInput(productInput), null);
+  }
+
+  @PutMapping("/{id}")
+  public Product updateProduct(@RequestBody final ProductInput productInput, @PathVariable("id") final String id) {
+    return productService.saveOrUpdateProduct(dataMapper.mapProductFromInput(productInput), id);
   }
 
 }

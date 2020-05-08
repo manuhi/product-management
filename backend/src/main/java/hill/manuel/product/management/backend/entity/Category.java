@@ -19,7 +19,7 @@ public class Category {
   private String id;
 
   @NotBlank
-  @Indexed(unique=true)
+  @Indexed(unique = true)
   private String name;
 
 }
