@@ -4,7 +4,9 @@ import hill.manuel.product.management.backend.entity.Category;
 import hill.manuel.product.management.backend.rest.pojo.CategoryInput;
 import hill.manuel.product.management.backend.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/category")
+@CrossOrigin
 public class CategoryController {
 
   private final CategoryService categoryService;

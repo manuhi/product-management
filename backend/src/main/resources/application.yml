@@ -6,3 +6,8 @@ spring:
 product-management:
   currency:
     base-url: https://api.exchangeratesapi.io
+
+server:
+  servlet:
+    context-path: /product-management
+  port: 8080
