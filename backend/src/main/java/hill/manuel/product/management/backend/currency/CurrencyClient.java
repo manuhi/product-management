@@ -3,6 +3,7 @@ package hill.manuel.product.management.backend.currency;
 import hill.manuel.product.management.backend.rest.pojo.PriceInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.annotation.Cacheable;
@@ -61,7 +62,6 @@ public class CurrencyClient {
     }
 
     if (symbol.equals(BASE_CURRENCY)) {
-      log.info("Currency is already " + BASE_CURRENCY);
       return priceInput.getValue();
     }
 
@@ -73,7 +73,7 @@ public class CurrencyClient {
         final Map<String, Double> rates = response.getBody().getRates();
         for (String s : rates.keySet()) {
           if (s.equals(BASE_CURRENCY)) {
-            return priceInput.getValue() * rates.get(s);
+            return Precision.round(priceInput.getValue() * rates.get(s), 2);
           }
         }
       }

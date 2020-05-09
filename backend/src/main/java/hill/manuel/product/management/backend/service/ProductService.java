@@ -17,7 +17,6 @@ import java.util.Optional;
 public class ProductService {
 
   private final ProductRepository productRepository;
-  private final DataMapper dataMapper;
 
   public Optional<Product> getProductById(final String id) {
     log.debug("Getting product for id {}", id);
@@ -44,6 +43,11 @@ public class ProductService {
       log.debug("Saving product with name {}", product.getName());
     }
     return productRepository.save(product);
+  }
+
+  public void deleteProductById(final String id) {
+    log.debug("Deleting product with id {}", id);
+    productRepository.deleteById(id);
   }
 
 }

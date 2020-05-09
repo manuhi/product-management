@@ -27,23 +27,23 @@ public class ProductManagementBackendApplication {
     SpringApplication.run(ProductManagementBackendApplication.class, args);
   }
 
-  @EventListener(ApplicationReadyEvent.class)
-  public void onStartup() {
-
-    productRepository.deleteAll();
-    categoryRepository.deleteAll();
-
-    categoryRepository.saveAll(Arrays.asList(new Category(null, "1")
-            , new Category(null, "2"), new Category(null, "3"), new Category(null, "4")));
-
-    final List<Category> all = categoryRepository.findAll();
-    System.out.println(all);
-
-    final Optional<Category> cat = categoryRepository.findByName("1");
-
-    productRepository.save(new Product(null, "Product 1", "My description", 1.5, cat.get()));
-
-    System.out.println(productRepository.findAll());
-
-  }
+//  @EventListener(ApplicationReadyEvent.class)
+//  public void onStartup() {
+//
+//    productRepository.deleteAll();
+//    categoryRepository.deleteAll();
+//
+//    categoryRepository.saveAll(Arrays.asList(new Category(null, "1")
+//            , new Category(null, "2"), new Category(null, "3"), new Category(null, "4")));
+//
+//    final List<Category> all = categoryRepository.findAll();
+//    System.out.println(all);
+//
+//    final Optional<Category> cat = categoryRepository.findByName("1");
+//
+//    productRepository.save(new Product(null, "Product 1", "My description", 1.5, cat.get()));
+//
+//    System.out.println(productRepository.findAll());
+//
+//  }
 }
