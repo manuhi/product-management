@@ -8,7 +8,6 @@ import Product from "./components/product/product";
 import ProductList from "./components/product/product-list";
 
 import AddCategory from "./components/category/add-category";
-import Category from "./components/category/category";
 import CategoryList from "./components/category/category-list";
 
 class App extends React.Component {
@@ -53,7 +52,6 @@ class App extends React.Component {
             <Route path="/product/:id" component={Product} />
             <Route exact path="/category" component={CategoryList} />
             <Route exact path="/addCategory" component={AddCategory} />
-            <Route path="/category/:id" component={Category} />
           </Switch>
         </div>
 
