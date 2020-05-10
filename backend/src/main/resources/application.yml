@@ -10,4 +10,3 @@ product-management:
 server:
   servlet:
     context-path: /product-management
-  port: 8080
