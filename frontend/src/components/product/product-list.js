@@ -1,18 +1,25 @@
 import React from 'react';
 import ProductService from '../../http/product-service'
 import { Link } from "react-router-dom";
+import { BsTrash } from "react-icons/bs";
 
 class ProductList extends React.Component {
 
     constructor(props) {
         super(props);
+        this.getAllProducts = this.getAllProducts.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
         this.state = {
             products: []
         }
     }
 
     componentDidMount() {
+        this.getAllProducts();
         
+    }
+
+    getAllProducts() {
         this.products = ProductService.getAllProducts()
         
         .then(response => {
@@ -21,6 +28,18 @@ class ProductList extends React.Component {
             });
         })
         
+        .catch(e => {
+            console.log(e);
+        });
+    }
+
+    deleteProduct(id) {
+        ProductService.deleteProductById(id)
+        
+        .then(resposne => {
+            this.getAllProducts();
+        })
+
         .catch(e => {
             console.log(e);
         });
@@ -39,6 +58,7 @@ class ProductList extends React.Component {
                             <th scope="col">Description</th>
                             <th scope="col">Price</th>
                             <th scope="col">Category</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,9 +76,14 @@ class ProductList extends React.Component {
                                 <td>{product.description}</td>
                                 <td>{product.price}</td>
                                 <td>{product.category.name}</td>
+                                <td>
+                                    <button style={{background: 'none', border: 'none'}}
+                                            onClick={() => this.deleteProduct(product.id)}>
+                                        <BsTrash/>
+                                    </button>
+                                </td>
                             </tr>
                         ))}
-    
                     </tbody>
                 </table>
             </div>

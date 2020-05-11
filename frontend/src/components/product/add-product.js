@@ -159,6 +159,7 @@ class AddProduct extends React.Component {
                             <label htmlFor="price" className="col-sm-3 col-form-label">Price</label>
                             <input
                                 type="number"
+                                step="0.01"
                                 className="form-control col-sm-6"
                                 id="price"
                                 required
