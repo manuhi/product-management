@@ -88,6 +88,8 @@ class CategoryControllerTest {
     restTemplate.delete("/category/"+ responseFromPost.getBody().getId());
     assertFalse(categoryRepository.findById(responseFromPost.getBody().getId()).isPresent());
 
+
+    categoryRepository.deleteAll();
   }
 
 }
